@@ -1,0 +1,24 @@
+services:
+  web:
+    build: .
+    volumes:
+      - .:/stocks_api  # Maps the current directory to /app in the container
+    ports:
+      - "8000:8000"
+
+  db:
+    image: postgres:13
+    environment:
+      POSTGRES_DB: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+    volumes:
+      - postgres_data:/var/lib/postgresql/data  # Stores database files outside the container
+
+  cache:
+    image: redis:6
+    ports:
+      - "6379:6379"
+
+volumes:
+  postgres_data:
