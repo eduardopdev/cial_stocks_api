@@ -1,8 +1,12 @@
 import requests
 from bs4 import BeautifulSoup
 from copy import deepcopy
+from dotenv import load_dotenv
+import os
 
-apikeypolygon = "bmN7i7CrzrpKqFvgbB1fEaztCwZKSUjJ"
+load_dotenv()
+apikeypolygon = os.getenv("POLYGON")
+proxy_2captcha = os.getenv("CAPTCHA2")
 
 def get_tickers():
     result = requests.get(url=f"https://api.polygon.io/v3/reference/tickers?market=stocks&active=true&limit=100&apiKey={apikeypolygon}").json()
@@ -17,7 +21,6 @@ def scraping_marketwatch(stock_ticker):
     mi = 1000000
     bi = 1000000000
     tri = bi * 1000
-    api_key_2captcha = "33f2bfc6db7c3a7af69aac6fd3eeb36e"
     proxy_2captcha = "	ud8c9f36f56c605c2-zone-custom:ud8c9f36f56c605c2@43.152.113.55:2333"
     url = f"https://www.marketwatch.com/investing/stock/{stock_ticker}"
     user_agent = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/130.0.0.0 Safari/537.36'
